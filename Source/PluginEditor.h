@@ -23,11 +23,15 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+   
+
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
+    
     CircularBufferDelayAudioProcessor& audioProcessor;
 
+    juce::Label sliderLabel;
+    juce::Slider levelSLider;
+        
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CircularBufferDelayAudioProcessorEditor)
 };

@@ -26,6 +26,7 @@ CircularBufferDelayAudioProcessor::CircularBufferDelayAudioProcessor()
 
 CircularBufferDelayAudioProcessor::~CircularBufferDelayAudioProcessor()
 {
+   
 }
 
 //==============================================================================
@@ -152,6 +153,8 @@ void CircularBufferDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& 
 
 }
 
+
+
 void CircularBufferDelayAudioProcessor::fillBuffer(juce::AudioBuffer<float>& buffer,int channel) {
 
     auto bufferSize = buffer.getNumSamples();
@@ -240,3 +243,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new CircularBufferDelayAudioProcessor();
 }
+

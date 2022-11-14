@@ -13,9 +13,15 @@
 CircularBufferDelayAudioProcessorEditor::CircularBufferDelayAudioProcessorEditor (CircularBufferDelayAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    
+    setSize (400, 600);
+
+
+    levelSLider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalDrag);
+    levelSLider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 75, 75);
+    levelSLider.setRange(0.0f, 1.0f);
+    levelSLider.setValue(0.5f);
+    addAndMakeVisible(levelSLider);
 }
 
 CircularBufferDelayAudioProcessorEditor::~CircularBufferDelayAudioProcessorEditor()
@@ -25,16 +31,12 @@ CircularBufferDelayAudioProcessorEditor::~CircularBufferDelayAudioProcessorEdito
 //==============================================================================
 void CircularBufferDelayAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void CircularBufferDelayAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    levelSLider.setBounds(getLocalBounds()/2);
 }
+
