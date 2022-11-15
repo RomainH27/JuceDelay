@@ -14,7 +14,8 @@
 //==============================================================================
 /**
 */
-class CircularBufferDelayAudioProcessorEditor  : public juce::AudioProcessorEditor
+class CircularBufferDelayAudioProcessorEditor  : public juce::AudioProcessorEditor,
+    public juce::Slider::Listener
 {
 public:
     CircularBufferDelayAudioProcessorEditor (CircularBufferDelayAudioProcessor&);
@@ -32,6 +33,8 @@ private:
 
     juce::Label sliderLabel;
     juce::Slider levelSLider;
+
+    void sliderValueChanged(juce::Slider* slider) override;
         
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CircularBufferDelayAudioProcessorEditor)
 };
