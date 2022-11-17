@@ -82,6 +82,18 @@ void CircularBufferDelayAudioProcessorEditor::sliderValueChanged(juce::Slider* s
 
         audioProcessor.volume = levelSlider.getValue();
     }
+    if (slider == &feedbackSlider) {
+
+        audioProcessor.feedback = feedbackSlider.getValue();
+    }
+    if (slider == &DryWetSlider) {
+
+        audioProcessor.dryWet = DryWetSlider.getValue();
+    }
+    if (slider == &delayTimeSlider) {
+
+        audioProcessor.delayTime = delayTimeSlider.getValue();
+    }
 }
 
 

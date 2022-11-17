@@ -57,6 +57,9 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     float volume;
+    float feedback;
+    float dryWet;
+    float delayTime;
 
 
 private:
@@ -65,6 +68,7 @@ private:
     int writePosition{ 0 };
 
     void fillBuffer(juce::AudioBuffer<float>& buffer, int channel);
+    void fillBufferFeedback(juce::AudioBuffer<float>& buffer, int channel);
     void readFromBuffer(juce::AudioBuffer<float>& buffer, juce::AudioBuffer<float>& delayBuffer, int channel);
     void updateBufferPositions(juce::AudioBuffer<float>& buffer, juce::AudioBuffer<float>& delayBuffer);
 
