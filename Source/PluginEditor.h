@@ -30,11 +30,25 @@ public:
 private:
     
     CircularBufferDelayAudioProcessor& audioProcessor;
+    
+    
 
-    juce::Label sliderLabel;
-    juce::Slider levelSLider;
+    juce::Label levelSliderLabel;
+    juce::Slider levelSlider;
+
+    juce::Label feedbackSliderLabel;
+    juce::Slider feedbackSlider;
+
+    juce::Label DryWetSliderLabel;
+    juce::Slider DryWetSlider;
+
+    juce::Label  delayTimeSliderLabel;
+    juce::Slider delayTimeSlider;
 
     void sliderValueChanged(juce::Slider* slider) override;
+
         
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CircularBufferDelayAudioProcessorEditor)
 };
+
+    
