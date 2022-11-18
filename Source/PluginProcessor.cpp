@@ -195,18 +195,18 @@ void CircularBufferDelayAudioProcessor::fillBufferFeedback(juce::AudioBuffer<flo
 
     if (delayBufferSize > bufferSize + writePosition) {
 
-        delayBuffer.copyFromWithRamp(channel, writePosition, buffer.getWritePointer(channel), bufferSize, feedback, feedback);
+        delayBuffer.copyFromWithRamp(channel, writePosition, buffer.getWritePointer(channel), bufferSize, dryWet, dryWet);
 
     }
     else {
 
         auto numSamplesToEnd = delayBufferSize - writePosition;
 
-        delayBuffer.copyFromWithRamp(channel, writePosition, buffer.getWritePointer(channel), numSamplesToEnd, feedback, feedback);
+        delayBuffer.copyFromWithRamp(channel, writePosition, buffer.getWritePointer(channel), numSamplesToEnd, dryWet, dryWet);
 
         auto numSamplesAtStart = bufferSize - numSamplesToEnd;
 
-        delayBuffer.copyFromWithRamp(channel, 0, buffer.getWritePointer(channel, numSamplesToEnd), numSamplesAtStart, feedback, feedback);
+        delayBuffer.copyFromWithRamp(channel, 0, buffer.getWritePointer(channel, numSamplesToEnd), numSamplesAtStart, dryWet, dryWet);
     }
 }
 
@@ -223,14 +223,14 @@ void CircularBufferDelayAudioProcessor::readFromBuffer(juce::AudioBuffer<float>&
 
     if (readPosition + bufferSize < delayBufferSize) {
 
-        buffer.addFromWithRamp(channel, 0, delayBuffer.getReadPointer(channel, readPosition), bufferSize, dryWet, dryWet);
+        buffer.addFromWithRamp(channel, 0, delayBuffer.getReadPointer(channel, readPosition), bufferSize, feedback, feedback);
     }
     else {
         auto numSamplesToEnd = delayBufferSize - readPosition;
-        buffer.addFromWithRamp(channel, 0, delayBuffer.getReadPointer(channel, readPosition), numSamplesToEnd, dryWet, dryWet);
+        buffer.addFromWithRamp(channel, 0, delayBuffer.getReadPointer(channel, readPosition), numSamplesToEnd, feedback, feedback);
 
         auto numSamplesAtStart = bufferSize - numSamplesToEnd;
-        buffer.addFromWithRamp(channel, numSamplesToEnd, delayBuffer.getReadPointer(channel, 0), numSamplesAtStart, dryWet, dryWet);
+        buffer.addFromWithRamp(channel, numSamplesToEnd, delayBuffer.getReadPointer(channel, 0), numSamplesAtStart, feedback, feedback);
 
     }
 }

@@ -14,6 +14,17 @@
 //==============================================================================
 /**
 */
+
+class CustomLNF : public juce::LookAndFeel_V4 {
+
+public:
+    void drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
+        const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider) override;
+
+};
+
+
+
 class CircularBufferDelayAudioProcessorEditor  : public juce::AudioProcessorEditor,
     public juce::Slider::Listener
 {
@@ -30,11 +41,12 @@ public:
 private:
     
     CircularBufferDelayAudioProcessor& audioProcessor;
-    
-    
+
+    CustomLNF test;
 
     juce::Label levelSliderLabel;
     juce::Slider levelSlider;
+    juce::Label levelSliderValue;
 
     juce::Label feedbackSliderLabel;
     juce::Slider feedbackSlider;
@@ -51,4 +63,4 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CircularBufferDelayAudioProcessorEditor)
 };
 
-    
+
