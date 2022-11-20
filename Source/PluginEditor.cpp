@@ -22,50 +22,66 @@ CircularBufferDelayAudioProcessorEditor::CircularBufferDelayAudioProcessorEditor
    
 
     levelSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    levelSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 60, 20);
-    levelSlider.setRange(0.0f, 1.0f);
-    levelSlider.setValue(0.0f);
+    levelSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 60, 20);
+    levelSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
+    levelSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
+    levelSlider.setRange(0.0, 1.0, 0.01);
+    levelSlider.setValue(0.0);
     levelSlider.addListener(this);
 
     levelSliderLabel.setText("Volume", juce::dontSendNotification);
     levelSliderLabel.attachToComponent(&levelSlider, false);
+    levelSliderLabel.setColour(juce::Label::textColourId, juce::Colours::grey);
     levelSliderLabel.setJustificationType(juce::Justification::centred);
-
-    levelSliderValue.setText("0.00", juce::dontSendNotification);
- 
-    addAndMakeVisible(levelSliderValue);
-   
-   // levelSliderValue.attachToComponent(&levelSlider, false);
 
     addAndMakeVisible(levelSlider);
 
     feedbackSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     feedbackSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 60, 20);
-    feedbackSlider.setRange(0.0f, 1.0f);
+    feedbackSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
+    feedbackSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
+    feedbackSlider.setRange(0.0, 1.0, 0.01);
     feedbackSlider.setValue(0.0f);
     feedbackSlider.addListener(this);
+
     feedbackSliderLabel.setText("Feedback", juce::dontSendNotification);
     feedbackSliderLabel.attachToComponent(&feedbackSlider, false);
+    feedbackSliderLabel.setColour(juce::Label::textColourId, juce::Colours::grey);
+    feedbackSliderLabel.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(feedbackSlider);
 
     delayTimeSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     delayTimeSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 60, 20);
-    delayTimeSlider.setRange(0.0f, 1.0f);
+    delayTimeSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
+    delayTimeSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
+    delayTimeSlider.setRange(0.0, 1.0, 0.01);
     delayTimeSlider.setValue(0.0f);
     delayTimeSlider.addListener(this);
+
     delayTimeSliderLabel.setText("Delay Time", juce::dontSendNotification);
     delayTimeSliderLabel.attachToComponent(&delayTimeSlider, false);
-    addAndMakeVisible(feedbackSlider);
+    delayTimeSliderLabel.setColour(juce::Label::textColourId, juce::Colours::grey);
+    delayTimeSliderLabel.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(delayTimeSlider);
 
     DryWetSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     DryWetSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 60, 20);
-    DryWetSlider.setRange(0.0f, 1.0f);
+    DryWetSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
+    DryWetSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
+    DryWetSlider.setRange(0.0, 1.0, 0.01);
     DryWetSlider.setValue(0.0f);
     DryWetSlider.addListener(this);
+
     DryWetSliderLabel.setText("Dry/Wet", juce::dontSendNotification);
     DryWetSliderLabel.attachToComponent(&DryWetSlider, false);
-    addAndMakeVisible(DryWetSlider);
+    DryWetSliderLabel.setColour(juce::Label::textColourId, juce::Colours::grey);
+    DryWetSliderLabel.setJustificationType(juce::Justification::centred);
+    addAndMakeVisible(DryWetSlider); 
+
+    /*
+    group1.setText("Parameters");
+    group1.setColour(juce::GroupComponent::outlineColourId, juce::Colours::grey);
+    addAndMakeVisible(group1);*/
 }
 
 CircularBufferDelayAudioProcessorEditor::~CircularBufferDelayAudioProcessorEditor()
@@ -76,33 +92,32 @@ CircularBufferDelayAudioProcessorEditor::~CircularBufferDelayAudioProcessorEdito
 //==============================================================================
 void CircularBufferDelayAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
+    background = juce::ImageCache::getFromMemory(BinaryData::Frame_1_png, BinaryData::Frame_1_pngSize);
+    g.drawImageWithin(background, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
 }
 
 void CircularBufferDelayAudioProcessorEditor::resized()
 {
-    levelSlider.setBounds(40, getHeight() / 4,getWidth()/5, getHeight() / 2);
+    delayTimeSlider.setBounds(40, getHeight() / 4, getWidth() / 5, getHeight() / 2);
 
-    levelSliderValue.setBounds(40 + levelSlider.getWidth() /2.5 , getHeight() / 4, getWidth() / 10, getHeight() / 2);
+    feedbackSlider.setBounds(65 + delayTimeSlider.getWidth(), getHeight() / 4, getWidth() / 5, getHeight() / 2);
 
-    feedbackSlider.setBounds(65+levelSlider.getWidth(), getHeight() / 4, getWidth() / 5, getHeight() / 2);
-    DryWetSlider.setBounds(90 + (levelSlider.getWidth()*2), getHeight() / 4, getWidth() / 5, getHeight() / 2);
-    delayTimeSlider.setBounds(115 + (levelSlider.getWidth() * 3), getHeight() / 4, getWidth() / 5, getHeight() / 2);
+    DryWetSlider.setBounds(90 + (delayTimeSlider.getWidth() * 2), getHeight() / 4, getWidth() / 5, getHeight() / 2);
+
+    levelSlider.setBounds(115 + (delayTimeSlider.getWidth() * 3), getHeight() / 4, getWidth() / 5, getHeight() / 2);
+
+    group1.setBounds(delayTimeSlider.getX(), delayTimeSlider.getY() - 50 , delayTimeSlider.getWidth() * 2 + 50 , delayTimeSlider.getHeight() + 70);
+
 }
 
 void CircularBufferDelayAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
-    std::cout << std::setprecision(1);
-
 
     if (slider == &levelSlider) {
-        
 
-        float value = levelSlider.getValue();
-        
         audioProcessor.volume = levelSlider.getValue();
-        levelSliderValue.setText(std::to_string(value), juce::dontSendNotification);
     }
     if (slider == &feedbackSlider) {
 
@@ -141,7 +156,7 @@ void  CustomLNF::drawRotarySlider(juce::Graphics& g, int x, int y, int width, in
         rotaryEndAngle,
         true);
 
-    g.setColour(juce::Colours::white);
+    g.setColour(juce::Colours::grey);
     g.strokePath(backgroundArc, juce::PathStrokeType(lineW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
 
     if (slider.isEnabled())
@@ -156,7 +171,7 @@ void  CustomLNF::drawRotarySlider(juce::Graphics& g, int x, int y, int width, in
             toAngle,
             true);
 
-        g.setColour(juce::Colours::white);
+        g.setColour(juce::Colours::grey);
         g.strokePath(valueArc, juce::PathStrokeType(lineW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
     }
 
@@ -164,7 +179,7 @@ void  CustomLNF::drawRotarySlider(juce::Graphics& g, int x, int y, int width, in
     juce::Point<float> thumbPoint(bounds.getCentreX() + arcRadius * std::cos(toAngle - juce::MathConstants<float>::halfPi),
         bounds.getCentreY() + arcRadius * std::sin(toAngle - juce::MathConstants<float>::halfPi));
 
-    g.setColour(juce::Colours::white);
+    g.setColour(juce::Colours::grey);
 
     g.drawLine(thumbPoint.getX(), thumbPoint.getY() , bounds.getCentreX() + (arcRadius/2) * std::cos(toAngle - juce::MathConstants<float>::halfPi),
         bounds.getCentreY() + (arcRadius / 2) * std::sin(toAngle - juce::MathConstants<float>::halfPi), 3.0f);

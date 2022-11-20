@@ -4,6 +4,9 @@
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
               jucerFormatVersion="1">
   <MAINGROUP id="oQ0tGo" name="circularBufferDelay">
+    <GROUP id="{5E697842-0FDD-7DB0-5390-C66A972E6903}" name="Assets">
+      <FILE id="i82GIJ" name="Frame 1.png" compile="0" resource="1" file="Frame 1.png"/>
+    </GROUP>
     <GROUP id="{01BCA92E-9BE3-BF2E-E727-37597AD2BF1B}" name="Source">
       <FILE id="VqrSkI" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

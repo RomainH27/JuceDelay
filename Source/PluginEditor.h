@@ -57,6 +57,10 @@ private:
     juce::Label  delayTimeSliderLabel;
     juce::Slider delayTimeSlider;
 
+    juce::GroupComponent group1;
+
+    juce::Image background;
+
     void sliderValueChanged(juce::Slider* slider) override;
 
         
