@@ -97,6 +97,7 @@ void CircularBufferDelayAudioProcessor::prepareToPlay (double sampleRate, int sa
     auto delayBufferSize = sampleRate * 2.0;
     delayBuffer.setSize(getTotalNumOutputChannels(), (int) delayBufferSize);  
 
+
 }
 
 void CircularBufferDelayAudioProcessor::releaseResources()

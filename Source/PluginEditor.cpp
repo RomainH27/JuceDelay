@@ -26,7 +26,7 @@ CircularBufferDelayAudioProcessorEditor::CircularBufferDelayAudioProcessorEditor
     levelSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
     levelSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
     levelSlider.setRange(0.0, 1.0, 0.01);
-    levelSlider.setValue(0.0);
+    levelSlider.setValue(0.8);
     levelSlider.addListener(this);
 
     levelSliderLabel.setText("Volume", juce::dontSendNotification);
@@ -41,7 +41,7 @@ CircularBufferDelayAudioProcessorEditor::CircularBufferDelayAudioProcessorEditor
     feedbackSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
     feedbackSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
     feedbackSlider.setRange(0.0, 1.0, 0.01);
-    feedbackSlider.setValue(0.0f);
+    feedbackSlider.setValue(0.5);
     feedbackSlider.addListener(this);
 
     feedbackSliderLabel.setText("Feedback", juce::dontSendNotification);
@@ -54,8 +54,9 @@ CircularBufferDelayAudioProcessorEditor::CircularBufferDelayAudioProcessorEditor
     delayTimeSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 60, 20);
     delayTimeSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
     delayTimeSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
-    delayTimeSlider.setRange(0.0, 1.0, 0.01);
-    delayTimeSlider.setValue(0.0f);
+    delayTimeSlider.setTextValueSuffix(" s");
+    delayTimeSlider.setRange(0.1, 1.0, 0.01);
+    delayTimeSlider.setValue(0.2);
     delayTimeSlider.addListener(this);
 
     delayTimeSliderLabel.setText("Delay Time", juce::dontSendNotification);
@@ -69,7 +70,7 @@ CircularBufferDelayAudioProcessorEditor::CircularBufferDelayAudioProcessorEditor
     DryWetSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
     DryWetSlider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::grey);
     DryWetSlider.setRange(0.0, 1.0, 0.01);
-    DryWetSlider.setValue(0.0f);
+    DryWetSlider.setValue(0.0);
     DryWetSlider.addListener(this);
 
     DryWetSliderLabel.setText("Dry/Wet", juce::dontSendNotification);
