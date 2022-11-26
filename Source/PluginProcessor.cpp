@@ -22,6 +22,7 @@ CircularBufferDelayAudioProcessor::CircularBufferDelayAudioProcessor()
                        )
 #endif
 {
+    
 }
 
 CircularBufferDelayAudioProcessor::~CircularBufferDelayAudioProcessor()
@@ -138,9 +139,6 @@ void CircularBufferDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& 
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-   
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
