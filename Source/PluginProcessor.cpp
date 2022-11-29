@@ -144,6 +144,7 @@ void CircularBufferDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& 
     {
 
         fillBuffer(buffer, channel);
+        setDelayAmount(channel);
         readFromBuffer(buffer, delayBuffer, channel);
         fillBuffer(buffer, channel);
 
@@ -152,6 +153,17 @@ void CircularBufferDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& 
 
     updateBufferPositions(buffer, delayBuffer);
 
+}
+
+void CircularBufferDelayAudioProcessor::setDelayAmount(int channel) {
+
+    auto* bufferReader = delayBuffer.getReadPointer(channel);
+    auto* bufferWriter = delayBuffer.getWritePointer(channel);
+
+    for (int sample = 0; sample < delayBuffer.getNumSamples(); sample++) {
+
+        bufferWriter[sample] = bufferReader[sample] * dryWet;
+    }
 }
 
 void CircularBufferDelayAudioProcessor::setVolume(juce::AudioBuffer<float>& buffer, int channel) {
